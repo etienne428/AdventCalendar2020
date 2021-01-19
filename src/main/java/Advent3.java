@@ -8,7 +8,6 @@ public class Advent3 {
 
     private static void check(String input, int line) {
         int[] jumps = {1, 3, 5, 7, 1};
-        System.out.println(input + "\n  " + line);
         for (int j = 0; j < jumps.length; j++) {
             if (j != 4) {
                 if (input.charAt((jumps[j] * line) % input.length()) == '#') {
@@ -29,7 +28,7 @@ public class Advent3 {
         return i;
     }
 
-    public static void parse(BufferedReader bufferedReader) throws IOException {
+    public static double parse(BufferedReader bufferedReader) throws IOException {
 
         String line = bufferedReader.readLine();
         int i;
@@ -38,6 +37,7 @@ public class Advent3 {
             check(line, i);
             line = bufferedReader.readLine();
         }
+        return computeSolution();
     }
 
     public static void main(String[] args) {

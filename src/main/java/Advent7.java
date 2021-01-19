@@ -51,7 +51,7 @@ public class Advent7 {
         return null;
     }
 
-    public static void parse(BufferedReader bufferedReader) throws IOException {
+    public static int parse(BufferedReader bufferedReader) throws IOException {
         String line = bufferedReader.readLine();
         int i;
         for (i = 0; line != null; i++) {
@@ -78,7 +78,7 @@ public class Advent7 {
         //        count = goldBag.getParents().size();
 
         System.out.println();
-
+        return count;
     }
 
     public static void main(String[] args) {

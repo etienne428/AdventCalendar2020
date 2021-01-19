@@ -7,21 +7,18 @@ public class Advent4 {
 
     private static void add(String input) {
         if (input.length() < 20) {
-//            System.out.println("Input too short ! " + input);
             return;
         }
         String[] passportData = input.split(" ");
 
         // Must contain at least 7 fields
         if (passportData.length < 7) {
-//            System.out.println("Not enough data ! " + passportData.length + "   " + input);
             return;
         }
 
         HashMap<Code, String> fieldOfP = new HashMap<>();
         for (String pD: passportData) {
             if (pD.length() < 3) {
-//                System.out.println("pD too short ! " + pD);
                 break;
             }
             String[] in = pD.split(":", 2);
@@ -34,11 +31,9 @@ public class Advent4 {
 
         for (Code code : Code.values()) {
             if (!checkCode(fieldOfP, code)) {
-//                System.out.println(input + "\n is not correct because of " + code.name());
                 return;
             }
         }
-//        System.out.println(input + " is correct!");
         count++;
     }
 
@@ -46,8 +41,6 @@ public class Advent4 {
         String tmp;
         tmp = fieldOfP.get(code);
         if (tmp == null) {
-            if (code.compareTo(Code.cid) != 0)
-                System.out.println(code + fieldOfP.toString());
             return code.compareTo(Code.cid) == 0;
         }
         int val;
@@ -111,14 +104,13 @@ public class Advent4 {
         }
     }
 
-    public static void parse(BufferedReader bufferedReader) throws IOException {
+    public static int parse(BufferedReader bufferedReader) throws IOException {
 
         String line = "";
         String nextLine = bufferedReader.readLine();
         int nOfLine = 0;
         while (nextLine != null) {
             if (nextLine.equals("")) {
-//                System.out.println("\n");
                 add(line);
                 nOfLine++;
                 line = "";
@@ -128,18 +120,16 @@ public class Advent4 {
             nextLine = bufferedReader.readLine();
         }
         if (!line.equals("")) {
-//            System.out.println("\n");
             add(line);
             nOfLine++;
         }
-        System.out.println(nOfLine);
+        return count;
     }
 
     public static void main(String[] args) {
         File file = new File("src\\main\\resources\\input4.txt");
         try {
             System.out.println("Attempting to read from file in: " + file.getCanonicalPath());
-
 
             BufferedReader bufferedReader;
             try {
@@ -149,7 +139,6 @@ public class Advent4 {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
