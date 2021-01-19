@@ -4,6 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
+/*
 public class Advent7b {
 
     private static LinkedList<Node> bagOfBags = new LinkedList<>();
@@ -198,4 +199,4 @@ public class Advent7b {
         }
     }
 }
-
+*/
