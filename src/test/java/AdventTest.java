@@ -106,4 +106,15 @@ public class AdventTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void day11Test() {
+        BufferedReader bf = readFile("input11b.txt");
+        try {
+            assert bf != null;
+            Assert.assertEquals(26, Advent11.parse(bf));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
