@@ -101,7 +101,7 @@ public class AdventTest {
         BufferedReader bf = readFile("input10b.txt");
         try {
             assert bf != null;
-            Assert.assertEquals(220, Advent10.parse(bf));
+            Assert.assertEquals(19208, Advent10.parse(bf));
         } catch (IOException e) {
             e.printStackTrace();
         }

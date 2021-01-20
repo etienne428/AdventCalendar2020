@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.LinkedList;
 
 public class Advent9 {
-    private static LinkedList<Long> codes = new LinkedList<Long>();
+    private static final LinkedList<Long> codes = new LinkedList<>();
     private static int preambleLength;
 
     private static long check() {
@@ -70,19 +70,9 @@ public class Advent9 {
         try {
             System.out.println("Attempting to read from file in: " + file.getCanonicalPath());
 
-
-            BufferedReader bufferedReader;
-            try {
-                bufferedReader = new BufferedReader(new FileReader(file));
-                long count = parse(bufferedReader, 25);
-
-                System.out.println("Solution is " + count);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            long count = parse(bufferedReader, 25);
+            System.out.println("Solution is " + count);
         } catch (IOException e) {
             e.printStackTrace();
         }
