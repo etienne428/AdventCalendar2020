@@ -26,14 +26,24 @@ public class Advent11 {
             }
         }
 
-        for (i = 0; i < 10; i++) {
-            computeRound();
+        while (computeRound()) {
             print(room);
         }
         return occupiedSeats();
     }
 
     private static void print(char[] room) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < room.length; i++) {
+            if (i % columns == 0) {
+                sb.append("\n");
+            }
+            sb.append(room[i]);
+        }
+        System.out.println(sb);
+    }
+
+    private static void print(int[] room) {
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < room.length; i++) {
             if (i % columns == 0) {
@@ -60,6 +70,7 @@ public class Advent11 {
                 changed = true;
             }
         }
+        print(neighbours);
         return changed;
     }
 
@@ -71,7 +82,7 @@ public class Advent11 {
             seatNumber = neighboursLocation[i] + index;
             try {
                 seat = room[seatNumber];
-                while (seat == '.') {
+                while (true) {
                     seatNumber += neighboursLocation[i];
                     seat = room[seatNumber];
                     if (index % columns == columns - 1
@@ -81,9 +92,10 @@ public class Advent11 {
                             && (i == 0 || i == 3 || i == 5)) {
                         throw new IndexOutOfBoundsException();
                     }
-                }
-                if (room[neighboursLocation[i] + index] == '#') {
-                    count++;
+                    if (room[neighboursLocation[i] + index] == '#') {
+                        count++;
+                        break;
+                    }
                 }
             } catch (IndexOutOfBoundsException ignored) {
             }
