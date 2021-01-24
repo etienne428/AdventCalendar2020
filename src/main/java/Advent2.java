@@ -4,12 +4,11 @@ import java.util.Arrays;
 public class Advent2 {
 
     public static int parse(BufferedReader bufferedReader) throws IOException {
-        int length = 200;
-        String[] input = new String[3];
+        String[] input;
         int count = 0;
 
         String line = bufferedReader.readLine();
-        for (int i = 0; line != null; i++) {
+        while (line != null) {
             input = line.split(" ", 3);
 
             System.out.println(Arrays.toString(input));
@@ -21,7 +20,6 @@ public class Advent2 {
             }
 
             line = bufferedReader.readLine();
-//            System.out.println(in[i]);
 
         }
 
@@ -29,11 +27,8 @@ public class Advent2 {
     }
 
     private static boolean check(String[] input) {
-//        System.out.println("min in char = " + input[0].split("-")[0]);
         String[] minMax = input[0].split("-", 2);
-//        System.out.println(minMax[0] + " = minMax");
-        int min = (int) Integer.parseInt(minMax[0]);
-//        System.out.println("min in int = " + min);
+        int min = Integer.parseInt(minMax[0]);
         int max = Integer.parseInt(minMax[1]);
 
         char letter = input[1].charAt(0);
@@ -45,22 +40,11 @@ public class Advent2 {
     }
 
     public static void main(String[] args) {
-        File file = new File("src\\main\\resources\\input2.txt");
+        String fileName = "src\\main\\resources\\input2.txt";
         try {
-            System.out.println("Attempting to read from file in: " + file.getCanonicalPath());
-
-
-        BufferedReader bufferedReader = null;
-        try {
-            bufferedReader = new BufferedReader(new FileReader(file));
-            int amount = parse(bufferedReader);
-            System.out.println("Solution is " + amount);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+            BufferedReader bufferedReader = InputReader.read(fileName);
+            int count = parse(bufferedReader);
+            System.out.println("Solution is " + count);
         } catch (IOException e) {
             e.printStackTrace();
         }

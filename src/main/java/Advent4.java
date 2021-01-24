@@ -108,11 +108,9 @@ public class Advent4 {
 
         String line = "";
         String nextLine = bufferedReader.readLine();
-        int nOfLine = 0;
         while (nextLine != null) {
             if (nextLine.equals("")) {
                 add(line);
-                nOfLine++;
                 line = "";
             } else {
                 line = line.concat(nextLine.concat(" "));
@@ -121,24 +119,16 @@ public class Advent4 {
         }
         if (!line.equals("")) {
             add(line);
-            nOfLine++;
         }
         return count;
     }
 
     public static void main(String[] args) {
-        File file = new File("src\\main\\resources\\input4.txt");
+        String fileName = "src\\main\\resources\\input4.txt";
         try {
-            System.out.println("Attempting to read from file in: " + file.getCanonicalPath());
-
-            BufferedReader bufferedReader;
-            try {
-                bufferedReader = new BufferedReader(new FileReader(file));
-                parse(bufferedReader);
-                System.out.println("Solution is " + count);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            BufferedReader bufferedReader = InputReader.read(fileName);
+            parse(bufferedReader);
+            System.out.println("Solution is " + count);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -152,7 +142,7 @@ public class Advent4 {
         hcl,
         ecl,
         pid,
-        cid;
+        cid
     }
 }
 

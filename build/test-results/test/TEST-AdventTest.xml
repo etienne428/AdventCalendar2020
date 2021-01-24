@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="AdventTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-01-24T15:02:07" hostname="LAPTOP-Q50VNPOL" time="0.046">
+<testsuite name="AdventTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-01-24T15:53:00" hostname="LAPTOP-Q50VNPOL" time="0.058">
   <properties/>
-  <testcase name="day12Test" classname="AdventTest" time="0.046"/>
+  <testcase name="day12Test" classname="AdventTest" time="0.058"/>
   <system-out><![CDATA[Attempting to read from file in: C:\Users\etien\Documents\GitFolders\AdventCalendar2020\src\test\resources\input12b.txt
-After F10 : north = 0, east = 10, dir = E
-After N3 : north = 3, east = 10, dir = E
-After F7 : north = 3, east = 17, dir = E
-After R90 : north = 3, east = 17, dir = S
-After F11 : north = -8, east = 17, dir = S
+After F10 : north = 10, east = 100
+wayPoint    1 10
+wayPointDir North East
+After N3 : north = 10, east = 100
+wayPoint    4 10
+wayPointDir North East
+After F7 : north = 38, east = 170
+wayPoint    4 10
+wayPointDir North East
+After R90 : north = 38, east = 170
+wayPoint    4 10
+wayPointDir East South
+After F11 : north = -72, east = 214
+wayPoint    4 10
+wayPointDir East South
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

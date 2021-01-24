@@ -83,23 +83,11 @@ public class Advent8 {
     }
 
     public static void main(String[] args) {
-        File file = new File("src\\main\\resources\\input8.txt");
+        String fileName = "src\\main\\resources\\input8.txt";
         try {
-            System.out.println("Attempting to read from file in: " + file.getCanonicalPath());
-
-
-            BufferedReader bufferedReader;
-            try {
-                bufferedReader = new BufferedReader(new FileReader(file));
-                int count = parse(bufferedReader);
-
-                System.out.println("Solution is " + count);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            BufferedReader bufferedReader = InputReader.read(fileName);
+            int count = parse(bufferedReader);
+            System.out.println("Solution is " + count);
         } catch (IOException e) {
             e.printStackTrace();
         }

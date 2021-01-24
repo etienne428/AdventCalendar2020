@@ -41,24 +41,12 @@ public class Advent3 {
     }
 
     public static void main(String[] args) {
-        File file = new File("src\\main\\resources\\input3.txt");
+        String fileName = "src\\main\\resources\\input3.txt";
         try {
-            System.out.println("Attempting to read from file in: " + file.getCanonicalPath());
-
-
-            BufferedReader bufferedReader;
-            try {
-                bufferedReader = new BufferedReader(new FileReader(file));
-                parse(bufferedReader);
-                System.out.println("Solution is " + Arrays.toString(count));
-
-                System.out.println("Solution is " + computeSolution());
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            BufferedReader bufferedReader = InputReader.read(fileName);
+            parse(bufferedReader);
+            System.out.println("Solution is " + Arrays.toString(count));
+            System.out.println("Solution is " + computeSolution());
         } catch (IOException e) {
             e.printStackTrace();
         }

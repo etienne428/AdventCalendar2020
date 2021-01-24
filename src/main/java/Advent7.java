@@ -1,19 +1,16 @@
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
 public class Advent7 {
 
-    private static LinkedList<Node> bagOfBags = new LinkedList<>();
+    private static final LinkedList<Node> bagOfBags = new LinkedList<>();
     static int count = 0;
 
     private static void check(String input) {
         System.out.println(input);
         String bag = input.split(" bags contain")[0];
         String[] childBags  = input.split(" bags contain")[1].split(",");
-//        System.out.println(bags[0]);
 
         Node parentBag = getBag(bag);
         if (parentBag == null) {
@@ -29,7 +26,6 @@ public class Advent7 {
                 }
                 bagOfBags.add(child);
                 child.addParent(parentBag);
-//                System.out.println(bags[0] + ". !!! ." + bagContained[i] + ".");
             }
         }
     }
@@ -53,14 +49,13 @@ public class Advent7 {
 
     public static int parse(BufferedReader bufferedReader) throws IOException {
         String line = bufferedReader.readLine();
-        int i;
-        for (i = 0; line != null; i++) {
-
+        while (line != null) {
             check(line);
             line = bufferedReader.readLine();
         }
 
         Node goldBag = getBag("shiny gold");
+        assert goldBag != null;
         LinkedList<Node> containers = goldBag.getParents();
         System.out.println("  " + Arrays.deepToString(containers.toArray()));
 
@@ -75,21 +70,17 @@ public class Advent7 {
                 count++;
             }
         }
-        //        count = goldBag.getParents().size();
 
         System.out.println();
         return count;
     }
 
     public static void main(String[] args) {
-        File file = new File("src\\main\\resources\\input7.txt");
+        String fileName = "src\\main\\resources\\input7.txt";
         try {
-//            System.out.println("Attempting to read from file in: " + file.getCanonicalPath());
-            BufferedReader bufferedReader;
-            bufferedReader = new BufferedReader(new FileReader(file));
+            BufferedReader bufferedReader = InputReader.read(fileName);
             parse(bufferedReader);
             System.out.println("Solution is " + count);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -97,8 +88,8 @@ public class Advent7 {
 
 
     private static class Node {
-        private LinkedList<Node> parents = new LinkedList<>();
-        private String value;
+        private final LinkedList<Node> parents = new LinkedList<>();
+        private final String value;
 
         public Node(String value) {
             this.value = value;

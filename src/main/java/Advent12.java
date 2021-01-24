@@ -15,9 +15,11 @@ public class Advent12 {
         Right('R'),
         Forward('F');
         char character;
+
         Direction(char c) {
             character = c;
         }
+
         static Direction getDirection(char c) {
             switch (c) {
                 case 'N':
@@ -39,52 +41,85 @@ public class Advent12 {
             }
         }
     }
+
     private static int north = 0;
     private static int east = 0;
-    private static Direction dir = Direction.East;
+    private static final int[] waypoint = {1, 10};
+    private static final Direction[] waypointDir = {Direction.North, Direction.East};
 
     public static void check(LinkedList<String> order) {
-        for (String o: order) {
-            move(o);
-//            System.out.println("After " + o + " : north = " + north
-//                    + ", east = " + east + ", dir = " + dir.character);
+        for (String o : order) {
+            char c = o.charAt(0);
+            Direction newDir = Direction.getDirection(c);
+            int card = Integer.parseInt(o.substring(1));
+            assert newDir != null;
+            addMove(newDir, card);
+            System.out.println("After " + o + " : north = " + north
+                    + ", east = " + east);
+            System.out.println("wayPoint    " + waypoint[0] + " " + waypoint[1]);
+            System.out.println("wayPointDir " + waypointDir[0] + " " + waypointDir[1]);
         }
     }
 
-    private static void move(String o) {
-        char c = o.charAt(0);
-        Direction newDir = Direction.getDirection(c);
-        int card = Integer.parseInt(o.substring(1));
-        addMove(newDir, card);
+    private static void changeWayPoint(Direction direction, int card) {
+        if (waypointDir[0] == direction) {
+            waypoint[0] += card;
+        } else if (waypointDir[1] == direction) {
+            waypoint[1] += card;
+        }
+    }
+
+    private static void rotate(int card, boolean minus) {
+        int wp0;
+        int wp1;
+        if (minus) {
+            wp0 = (waypointDir[0].ordinal() - (card / 90) + 4) % 4;
+            wp1 = (waypointDir[1].ordinal() - (card / 90) + 4) % 4;
+        } else {
+            wp0 = (waypointDir[0].ordinal() + (card / 90) + 4) % 4;
+            wp1 = (waypointDir[1].ordinal() + (card / 90) + 4) % 4;
+        }
+            waypointDir[0] = Direction.values()[wp0];
+            waypointDir[1] = Direction.values()[wp1];
+    }
+
+    private static void doMove(int card) {
+        for (int i = 0; i < 2; i++) {
+            switch (waypointDir[i]) {
+                case North:
+                    north += card * waypoint[i];
+                    break;
+                case East:
+                    east += card * waypoint[i];
+                    break;
+                case South:
+                    north -= card * waypoint[i];
+                    break;
+                case West:
+                    east -= card * waypoint[i];
+                    break;
+                default:
+                    System.out.println("Error : " + waypointDir[i].name());
+            }
+        }
     }
 
     private static void addMove(Direction newDir, int card) {
         switch (newDir) {
             case North:
-                north += card;
-                break;
             case East:
-                east += card;
-                break;
             case South:
-                north -= card;
-                break;
             case West:
-                east -= card;
+                changeWayPoint(newDir, card);
                 break;
             case Link:
-                int linkDir = (dir.ordinal() - (card / 90) + 4) % 4;
-                System.out.println("Dir = " + dir + " car = " + card);
-                System.out.println((dir.ordinal() - (card / 90))
-                        + " and " + (dir.ordinal() - (card / 90) + 4) % 4);
-                dir = Direction.values()[linkDir];
+                rotate(card, true);
                 break;
             case Right:
-                int rightDir = (dir.ordinal() + (card / 90)) % 4;
-                dir = Direction.values()[rightDir];
+                rotate(card, false);
                 break;
             case Forward:
-                addMove(dir, card);
+                doMove(card);
                 break;
         }
     }
@@ -101,11 +136,9 @@ public class Advent12 {
     }
 
     public static void main(String[] args) {
-        File file = new File("src\\main\\resources\\input12.txt");
+        String fileName = "src\\main\\resources\\input12.txt";
         try {
-            System.out.println("Attempting to read from file in: " + file.getCanonicalPath());
-
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            BufferedReader bufferedReader = InputReader.read(fileName);
             long count = parse(bufferedReader);
             System.out.println("Solution is " + count);
         } catch (IOException e) {

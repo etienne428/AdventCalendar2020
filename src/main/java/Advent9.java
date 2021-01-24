@@ -66,16 +66,14 @@ public class Advent9 {
     }
 
     public static void main(String[] args) {
-        File file = new File("src\\main\\resources\\input9.txt");
+        String fileName = "src\\main\\resources\\input9.txt";
         try {
-            System.out.println("Attempting to read from file in: " + file.getCanonicalPath());
-
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+            BufferedReader bufferedReader = InputReader.read(fileName);
             long count = parse(bufferedReader, 25);
             System.out.println("Solution is " + count);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        } 
     }
 }
 

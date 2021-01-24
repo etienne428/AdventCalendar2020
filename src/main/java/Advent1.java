@@ -32,14 +32,12 @@ public class Advent1 {
     }
 
     public static void main(String[] args) {
-        File file = new File("input.txt");
-        BufferedReader input = null;
+        String fileName = "src\\main\\resources\\input.txt";
         try {
-            input = new BufferedReader(new FileReader(file));
-            int[] numbers = findNumbers(input);
-            System.out.println(numbers[0] + " * " + numbers[1] + " * " + numbers[2] + " = " + numbers[0] * numbers[1] * numbers[2]);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            BufferedReader bufferedReader = InputReader.read(fileName);
+            int[] numbers = findNumbers(bufferedReader);
+            System.out.println(numbers[0] + " * " + numbers[1] + " * " + numbers[2]
+                    + " = " + numbers[0] * numbers[1] * numbers[2]);
         } catch (IOException e) {
             e.printStackTrace();
         }

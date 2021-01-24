@@ -1,6 +1,4 @@
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
@@ -48,17 +46,11 @@ public class Advent6 {
     }
 
     public static void main(String[] args) {
-        File file = new File("src\\main\\resources\\input6.txt");
+        String fileName = "src\\main\\resources\\input6.txt";
         try {
-            System.out.println("Attempting to read from file in: " + file.getCanonicalPath());
-            BufferedReader bufferedReader;
-            try {
-                bufferedReader = new BufferedReader(new FileReader(file));
-                parse(bufferedReader);
-                System.out.println("Solution is " + count);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            BufferedReader bufferedReader = InputReader.read(fileName);
+            parse(bufferedReader);
+            System.out.println("Solution is " + count);
         } catch (IOException e) {
             e.printStackTrace();
         }
