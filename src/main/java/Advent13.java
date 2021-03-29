@@ -4,22 +4,37 @@ import java.util.LinkedList;
 
 public class Advent13 {
 
-    private static long check(LinkedList<String> seats) {
-        return 0;
+    private static int startingTime;
+    private static String[] buses;
+    private static int waitingTime;
+    private static int busToTake;
+
+    private static void check() {
+        int busID;
+        waitingTime = startingTime;
+        for (String bus: buses) {
+            if (!bus.equals("x")) {
+                busID = Integer.parseInt(bus);
+//                System.out.println(Long.MAX_VALUE);
+                System.out.println(busID + " wT " + (busID - (startingTime % busID)));
+                if ((busID - (startingTime % busID)) < waitingTime) {
+                    waitingTime = (busID - (startingTime % busID));
+                    busToTake = busID;
+                }
+            }
+        }
     }
 
     public static long parse(BufferedReader bufferedReader) throws IOException {
         String line = bufferedReader.readLine();
-        LinkedList<String> seats = new LinkedList<>();
-        while (line != null) {
-            seats.add(line);
-            line = bufferedReader.readLine();
-        }
-        return check(seats);
+        startingTime = Integer.parseInt(line);
+        buses = bufferedReader.readLine().split(",");
+        check();
+        return (long) busToTake * waitingTime;
     }
 
     public static void main(String[] args) {
-        String fileName = "src\\main\\resources\\input11.txt";
+        String fileName = "src\\main\\resources\\input13.txt";
         try {
             BufferedReader bufferedReader = InputReader.read(fileName);
             long count = parse(bufferedReader);
