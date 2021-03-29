@@ -27,8 +27,9 @@ public class Advent11 {
         }
 
         while (computeRound()) {
-            print(room);
+//            print(room);
         }
+        print(room);
         return occupiedSeats();
     }
 
@@ -59,7 +60,8 @@ public class Advent11 {
         int[] neighbours = new int[room.length];
         boolean changed = false;
         for (int i = 0; i < room.length; i++) {
-            neighbours[i] = numberOfNeighbours(i);
+            if (room[i] != '.')
+                neighbours[i] = numberOfNeighbours(i);
         }
         for (int i = 0; i < room.length; i++) {
             if (room[i] == 'L' && neighbours[i] == 0) {
@@ -70,21 +72,17 @@ public class Advent11 {
                 changed = true;
             }
         }
-        print(neighbours);
+//        print(neighbours);
         return changed;
     }
 
     private static int numberOfNeighbours(int index) {
         int count = 0;
-        char seat;
         int seatNumber;
         for (int i = 0; i < neighboursLocation.length; i++) {
             seatNumber = neighboursLocation[i] + index;
             try {
-                seat = room[seatNumber];
                 while (true) {
-                    seatNumber += neighboursLocation[i];
-                    seat = room[seatNumber];
                     if (index % columns == columns - 1
                             && (i == 2 || i == 4 || i == 7)) {
                         throw new IndexOutOfBoundsException();
@@ -92,10 +90,13 @@ public class Advent11 {
                             && (i == 0 || i == 3 || i == 5)) {
                         throw new IndexOutOfBoundsException();
                     }
-                    if (room[neighboursLocation[i] + index] == '#') {
+                    if (room[seatNumber] == '#') {
                         count++;
                         break;
+                    } else if (room[seatNumber] == 'L') {
+                        break;
                     }
+                    seatNumber += neighboursLocation[i];
                 }
             } catch (IndexOutOfBoundsException ignored) {
             }

@@ -1,6 +1,4 @@
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -18,6 +16,21 @@ public class Advent12 {
 
         Direction(char c) {
             character = c;
+        }
+
+        static Direction getOpposite(Direction c) {
+            switch (c) {
+                case North:
+                    return South;
+                case East:
+                    return West;
+                case South:
+                    return North;
+                case West:
+                    return East;
+                default:
+                    return null;
+            }
         }
 
         static Direction getDirection(char c) {
@@ -54,7 +67,7 @@ public class Advent12 {
             int card = Integer.parseInt(o.substring(1));
             assert newDir != null;
             addMove(newDir, card);
-            System.out.println("After " + o + " : north = " + north
+            System.out.println("\nAfter " + o + " : north = " + north
                     + ", east = " + east);
             System.out.println("wayPoint    " + waypoint[0] + " " + waypoint[1]);
             System.out.println("wayPointDir " + waypointDir[0] + " " + waypointDir[1]);
@@ -64,8 +77,12 @@ public class Advent12 {
     private static void changeWayPoint(Direction direction, int card) {
         if (waypointDir[0] == direction) {
             waypoint[0] += card;
+        } else if (waypointDir[0] == Direction.getOpposite(direction)) {
+            waypoint[0] -= card;
         } else if (waypointDir[1] == direction) {
             waypoint[1] += card;
+        } else if (waypointDir[1] == Direction.getOpposite(direction)) {
+            waypoint[1] -= card;
         }
     }
 

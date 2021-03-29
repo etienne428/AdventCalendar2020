@@ -1,16 +1,21 @@
 yAttempting to read from file in: C:\Users\etien\Documents\GitFolders\AdventCalendar2020\src\test\resources\input12b.txt
+
 $After F10 : north = 10, east = 100
 wayPoint    1 10
 wayPointDir North East
+
 #After N3 : north = 10, east = 100
 wayPoint    4 10
 wayPointDir North East
+
 #After F7 : north = 38, east = 170
 wayPoint    4 10
 wayPointDir North East
+
 $After R90 : north = 38, east = 170
 wayPoint    4 10
 wayPointDir East South
+
 %After F11 : north = -72, east = 214
 wayPoint    4 10
 wayPointDir East South
